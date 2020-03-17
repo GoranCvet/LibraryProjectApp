@@ -1,0 +1,101 @@
+﻿@page
+@model WebApp.ClientListModel
+@{
+    ViewData["Title"] = "ClientList";
+}
+
+<h2>Clients List</h2>
+
+<form method="get">
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search Client" asp-for="@Model.SearchTerm">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<a class="btn btn-primary mb-2" asp-page="./ClientEdit">Create Client</a>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">
+        @Model.Message
+    </div>
+}
+
+<table class="table" id="myTable">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Clients)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Phone
+                </td>
+                <td>
+                    @item.Address
+                </td>
+                <td>
+                    @item.City
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-page="./ClientDetails" asp-route-id="@item.Id">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a class="btn btn-outline-primary" asp-page="./ClientEdit" asp-route-id="@item.Id">
+                        <i class="fas fa-user-edit"></i>
+                    </a>
+                    <a class="btn btn-outline-danger" asp-page="./ClientDelete" asp-route-id="@item.Id">
+                        <i class="fas fa-trash"></i>
+                    </a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+
+
+@section Scripts {
+    <script>
+           $(document).ready( function () {
+                 $('#myTable').DataTable();
+            } );
+    </script>
+}
+
+
+@if (Model.Clients.Count() == 0)
+{
+    <div>
+        <span>No Clients Added!</span>
+    </div>
+}
+

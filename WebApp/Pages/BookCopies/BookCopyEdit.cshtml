@@ -1,0 +1,23 @@
+﻿@page
+@model WebApp.BookCopyEditModel
+@{
+    ViewData["Title"] = "BookCopyEdit";
+}
+
+<h2>Change number of Copies for Book @Model.BookCopy.Book.Title</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="BookCopy.Id" />
+    <input type="hidden" asp-for="BookCopy.BookId" />
+
+    <div class="form-group">
+        <label asp-for="BookCopy.NumberOfCopies"></label>
+        <input class="form-control" asp-for="BookCopy.NumberOfCopies" />
+        <span asp-validation-for="BookCopy.NumberOfCopies" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Edit</button>
+        <a class="btn btn-primary" asp-page="./BookCopiesList">Back</a>
+    </div>
+</form>

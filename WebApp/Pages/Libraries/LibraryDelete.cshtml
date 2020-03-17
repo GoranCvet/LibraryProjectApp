@@ -1,0 +1,18 @@
+﻿@page
+@model WebApp.LibraryDeleteModel
+@{
+    ViewData["Title"] = "LibraryDelete";
+}
+
+<h2>Are you sure you want to Delete @Model.Library.Name ?</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Library.Id" />
+    <div class="form-group">
+        <button class="btn btn-danger" type="submit">Yes</button>
+        <a class="btn btn-primary" asp-page="./LibrariesList">Cancel</a>
+    </div>
+
+
+</form>

@@ -1,0 +1,48 @@
+﻿@page
+@model WebApp.ReturnLendingModel
+@{
+    ViewData["Title"] = "ReturnLending";
+}
+
+<h2>Return Book Confimation</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Lending.Id" />
+    <input type="hidden" asp-for="Lending.BookId" />
+    <input type="hidden" asp-for="Lending.ClientId" />
+    <input type="hidden" asp-for="Lending.LibraryId" />
+
+    <div class="form-group">
+        <label asp-for="Lending.Book.Title"></label>
+        <input class="form-control" asp-for="Lending.Book.Title" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Lending.LibraryId"></label>
+        <input class="form-control" asp-for="Lending.LibraryId" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Lending.DatumZajmuvanje"></label>
+        <input class="form-control" asp-for="Lending.DatumZajmuvanje" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Lending.DatumVratena"></label>
+        <input class="form-control" asp-for="Lending.DatumVratena" />
+    </div>
+
+    <input type="hidden" asp-for="Lending.Book.BookDescription" />
+    <span asp-validation-for="Lending.Book.BookDescription"></span>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Confirm</button>
+        <a class="btn btn-primary" asp-page="/Clients/ClientDetails" asp-route-id="@Model.Lending.ClientId">Back</a>
+    </div>
+
+
+
+
+</form>
+

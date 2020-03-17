@@ -1,0 +1,55 @@
+﻿@page
+@model WebApp.LibrariesListModel
+@{
+    ViewData["Title"] = "LibrariesList";
+}
+
+<h2>List of Libraries</h2>
+
+<a class="btn btn-primary mb-2" asp-page="./LibraryEdit">Create Library</a>
+
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                City
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Libraries)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Address
+            </td>
+            <td>
+                @item.City
+            </td>
+            <td>
+                <a class="btn btn-outline-primary" asp-page="./LibraryDetails" asp-route-id="@item.Id">Info</a>
+                <a class="btn btn-outline-primary" asp-page="./LibraryEdit" asp-route-id="@item.Id">Edit</a>
+                <a class="btn btn-outline-danger" asp-page="./LibraryDelete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+@if (Model.Libraries.Count() == 0)
+{
+    <div class="alert">
+        No Libraries Added
+    </div> 
+}

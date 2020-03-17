@@ -1,0 +1,39 @@
+﻿@page "{id:int?}"
+@model WebApp.LibraryEditModel
+@{
+    ViewData["Title"] = "LibraryEdit";
+    var CreateEdit = Model.Library.Id > 0 ? "Edit" : "Create";
+}
+
+<h2>@CreateEdit Library</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Library.Id" />
+
+    <div class="form-group">
+        <label asp-for="Library.Name"></label>
+        <input class="form-control" asp-for="Library.Name" />
+        <span asp-validation-for="Library.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Library.Address"></label>
+        <input class="form-control" asp-for="Library.Address" />
+        <span asp-validation-for="Library.Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Library.City"></label>
+        <input class="form-control" asp-for="Library.City" />
+        <span asp-validation-for="Library.City" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn btn-primary" asp-page="./LibrariesList">Back</a>
+    </div>
+
+
+</form>
+

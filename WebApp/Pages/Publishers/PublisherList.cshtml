@@ -1,0 +1,61 @@
+﻿@page
+@model WebApp.PublisherListModel
+@{
+    ViewData["Title"] = "PublisherList";
+}
+
+<h2>Publishers List</h2>
+
+<a class="btn btn-primary mb-2" asp-page="./PublisherEdit">Create Publisher</a>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">
+        @Model.Message
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Country
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    @foreach(var item in Model.Publishers)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Country
+            </td>
+            <td>
+                <a class="btn btn-outline-primary" asp-page="./PublisherEdit" asp-route-id="@item.Id">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a class="btn btn-outline-danger" asp-page="./PublisherDelete" asp-route-id="@item.Id">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+    }
+    <tfoot style="visibility:@(!Model.Publishers.Any()? "visible" : "hidden")">
+        <tr>
+            <td>
+                Nothing to Display.
+            </td>
+        </tr>
+
+    </tfoot>
+
+
+</table>
+

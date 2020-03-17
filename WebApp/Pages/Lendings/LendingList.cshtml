@@ -1,0 +1,68 @@
+﻿@page
+@model WebApp.LendingListModel
+@{
+    ViewData["Title"] = "LendingList";
+}
+
+<h2>List of All Lent Books</h2>
+
+<a class="btn btn-primary mb-2" asp-page="./CreateLending">Create Lending</a>.
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-danger">
+        @Model.Message
+    </div>
+}
+
+<table class="table" id="lendingtable">
+
+    <thead>
+        <tr>
+            <th>
+                Book Title
+            </th>
+            <th>
+                Client Name
+            </th>
+            <th>
+                Date Lent
+            </th>
+            <th>
+                Date Returned
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Lendings)
+    {
+        <tr>
+            <td>
+                @item.Book.Title
+            </td>
+            <td>
+                @item.Client.Name
+            </td>
+            <td>
+                @item.DatumZajmuvanje.Day/@item.DatumZajmuvanje.Month /@item.DatumZajmuvanje.Year
+            </td>
+            <td>
+                @item.DatumVratena
+            </td>
+        </tr>
+    }
+
+</table>
+@if (Model.Lendings.Count() == 0)
+{
+    <span>No Lendigs Added</span>
+}
+
+@section Scripts {
+    <script>
+           $(document).ready( function () {
+                 $('#lendingtable').DataTable();
+            } );
+    </script>
+}
+
+

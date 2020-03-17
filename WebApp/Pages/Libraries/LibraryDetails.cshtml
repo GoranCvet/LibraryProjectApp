@@ -1,0 +1,37 @@
+﻿@page
+@model WebApp.LibraryDetailsModel
+@{
+    ViewData["Title"] = "LibraryDetails";
+}
+
+<h2>Available books in Library @Model.Library.Name</h2>
+
+
+<a class="btn btn-primary mb-2" asp-page="AddBook" asp-route-id="@Model.Library.Id">Add Book</a>
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>
+                Book Title
+            </th>
+            <th>
+                Copies in Library
+            </th>
+        </tr>
+    </thead>
+    @foreach(var item in Model.BookCopiesLibraries.Where(bc => bc.LibraryId == Model.Library.Id))
+    {
+        <tr>
+            <td>
+                @item.BookCopies.Book.Title
+            </td>
+            <td>
+                @item.LibriryCopies
+            </td>
+        </tr>
+    }
+
+
+</table>

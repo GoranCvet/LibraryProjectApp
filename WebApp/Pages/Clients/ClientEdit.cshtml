@@ -1,0 +1,41 @@
+﻿@page "{id:int?}"
+@model WebApp.ClientEditModel
+@{
+    ViewData["Title"] = "ClientEdit";
+    var CreateEdit = Model.Client.Id > 0 ? "Edit" : "Create";
+}
+
+<h2>@CreateEdit Client</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Client.Id" />
+
+    <div class="form-group">
+        <label asp-for="Client.Name"></label>
+        <input class="form-control" asp-for="Client.Name" />
+        <span asp-validation-for="Client.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Client.Phone"></label>
+        <input class="form-control" asp-for="Client.Phone" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Client.Address"></label>
+        <input class="form-control" asp-for="Client.Address" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Client.City"></label>
+        <input class="form-control" asp-for="Client.City" />
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn btn-primary" asp-page="./ClientList">Back</a>
+    </div>
+
+</form>
+

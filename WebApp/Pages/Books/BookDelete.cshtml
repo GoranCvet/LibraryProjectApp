@@ -1,0 +1,16 @@
+﻿@page "{id:int}"
+@model WebApp.BookDeleteModel
+@{
+    ViewData["Title"] = "BookDelete";
+}
+
+<h2>Are you sure you want to Delete @Model.Book.Title</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Book.Id" />
+
+    <button type="submit" class="btn btn-danger">Yes</button>
+    <a class="btn btn-primary" asp-page="./BookList">No</a>
+
+</form>

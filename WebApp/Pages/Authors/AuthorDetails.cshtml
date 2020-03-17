@@ -1,0 +1,56 @@
+﻿@page "{id:int}"
+@model WebApp.AuthorDetailsModel
+@{
+    ViewData["Title"] = "AuthorDetails";
+    var authorPhoto = "~/images/authorImages/" + (Model.Author.AuthorPhoto ?? "noauthor.png");
+}
+
+<h2>Author Details</h2>
+
+<div class="row">
+    <div class="col-sm-6">
+        <table class="table">
+            <tr>
+                <td class="font-weight-bold">
+                    Author Name
+                </td>
+                <td>
+                    @Model.Author.Name
+                </td>
+            </tr>
+            <tr>
+                <td class="font-weight-bold">
+                    Country
+                </td>
+                <td>
+                    @Model.Author.Country
+                </td>
+            </tr>
+            <tr>
+                <td class="font-weight-bold">
+                    About
+                </td>
+                <td>
+                    @Model.Author.AuthorBio
+                </td>
+            </tr>
+
+        </table>
+        <div class="form-group">
+            <a class="btn btn-primary" asp-page="./AuthorEdit" asp-route-id="@Model.Author.Id">Edit</a>
+            <a class="btn btn-primary" asp-page="./AuthorList">Authors List</a>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <div class="alert alert-info">
+                @Model.Message
+            </div>
+        }
+
+    </div>
+    <div class="col-sm-5">
+        <img src="@authorPhoto" alt="" class="img-fluid" asp-append-version="true" />
+    </div>
+
+</div>

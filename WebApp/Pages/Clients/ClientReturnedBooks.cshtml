@@ -1,0 +1,60 @@
+﻿@page
+@model WebApp.ClientDetailsModel
+@{
+    ViewData["Title"] = "ClientReturnedBooks";
+}
+
+<h2>Returned Books for client @Model.Client.Name</h2>
+
+
+<table class="table" id="returnedBooks">
+
+    <thead>
+        <tr>
+            <th>
+                Book Title
+            </th>
+            <th>
+                Date Lent
+            </th>
+            <th>
+                Date Returned
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Lendings.OrderByDescending(i => i.DatumVratena))
+        {
+            if (item.ClientId == Model.Client.Id && item.DatumVratena != null)
+            {
+                <tr>
+                    <td>
+                        @item.Book.Title
+                    </td>
+                    <td>
+                        @item.DatumZajmuvanje.Day / @item.DatumZajmuvanje.Month / @item.DatumZajmuvanje.Year
+                    </td>
+                    <td>
+                        @item.DatumVratena.Value.Day / @item.DatumVratena.Value.Month / @item.DatumVratena.Value.Year
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+
+
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#returnedBooks').DataTable();
+        });
+    </script>
+}
+
+<a class="btn btn-primary" asp-page="ClientDetails" asp-route-id="@Model.Client.Id">Back</a>
+
+

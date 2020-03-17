@@ -1,0 +1,96 @@
+﻿@page "{id:int}"
+@model WebApp.BookDetailsModel
+@{
+    ViewData["Title"] = "BookDetails";
+    var bookPhoto = "~/images/bookImages/" + (Model.Book.BookPhoto ?? "nobook.png");
+
+}
+
+<h2>Book Details</h2>
+
+<div class="row">
+
+    <div class="col-sm-7">
+
+        @if (!string.IsNullOrEmpty(Model.Message))
+        {
+            <div class="alert alert-info">
+                @Model.Message
+            </div>
+        }
+
+        <table class="table">
+            <tr>
+                <td class="font-weight-bold">
+                    Title
+                </td>
+                <td>
+                    @Model.Book.Title
+                </td>
+            </tr>
+            <tr>
+                <td class="font-weight-bold">
+                    Author
+                </td>
+                <td>
+                    @Model.Book.Author.Name
+                </td>
+            </tr>
+            <tr>
+                <td class="font-weight-bold">
+                    Publisher
+                </td>
+                <td>
+                    @Model.Book.Publisher.Name
+                </td>
+            </tr>
+            <tr>
+                <td class="font-weight-bold">
+                    Year of Issue
+                </td>
+                <td>
+                    @Model.Book.YearOfIssue
+                </td>
+            </tr>
+            <tr>
+                <td class="font-weight-bold">
+                    Number Of Pages
+                </td>
+                <td>
+                    @Model.Book.NumberOfPages
+                </td>
+            </tr>
+            <tr>
+                <td class="font-weight-bold">
+                    Number of Copies
+                </td>
+                <td>
+
+                </td>
+            <tr>
+                <td class="font-weight-bold">
+                    Book Description
+                </td>
+                <td>
+                    @Model.Book.BookDescription
+                </td>
+            </tr>
+
+        </table>
+
+        <div class="form-group">
+            <a class="btn btn-light" asp-page="/BookCopies/CreateBookCopy" asp-route-id="@Model.Book.Id">Create a Copy</a>
+        </div>
+
+        <div class="form-group">
+            <a class="btn btn-primary" asp-page="./BookEdit" asp-route-id="@Model.Book.Id">Edit</a>
+            <a class="btn btn-primary" asp-page="./BookList">Back</a>
+        </div>
+
+    </div>
+    <div class="col-sm-5">
+        <img src="@bookPhoto" alt="Book Image" class="img-fluid" asp-append-version="true" />
+    </div>
+
+</div>
+

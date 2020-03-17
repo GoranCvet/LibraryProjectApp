@@ -1,0 +1,16 @@
+﻿@page "{id:int}"
+@model WebApp.AuthorDeleteModel
+@{
+    ViewData["Title"] = "AuthorDelete";
+}
+
+<h3>Are you sure you want to Delete @Model.Author.Name ?</h3>
+
+<form method="post">
+    
+    <input type="hidden" asp-for="Author.Id" />
+
+    <button type="submit" class="btn btn-danger">Yes</button>
+    <a class=" btn btn-primary" asp-page="./AuthorList">No</a>
+
+</form>
