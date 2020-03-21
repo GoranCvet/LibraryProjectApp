@@ -51,7 +51,8 @@ namespace WebApp
                 BookCopiesLibrary = bookCopiesLibraryService.Create(BookCopiesLibrary);
 
                 bookCopiesLibraryService.Commit();
-                return RedirectToPage("LibrariesList");
+                Library = libraryService.GetLibraryById(BookCopiesLibrary.LibraryId);
+                return RedirectToPage("/Libraries/LibraryDetails", new { id = Library.Id });
             }
 
             return Page();

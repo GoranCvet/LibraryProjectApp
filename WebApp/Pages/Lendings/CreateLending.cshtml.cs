@@ -75,7 +75,7 @@ namespace WebApp
                 lendingService.Commit();
                 Client.Id = Lending.ClientId;
 
-                return RedirectToPage("LendingList", new { id = Lending.Id});
+                return RedirectToPage("/Clients/ClientDetails", new { id = Client.Id});
             }
 
             SelectBook = bookService.GetBooks().Select(b => new SelectListItem
