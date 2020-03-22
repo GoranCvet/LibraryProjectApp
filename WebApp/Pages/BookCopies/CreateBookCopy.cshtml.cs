@@ -6,6 +6,7 @@ using LibraryProject.Data.IServices;
 using LibraryProject.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApp
 {
@@ -13,16 +14,20 @@ namespace WebApp
     {
         private readonly IBookCopiesService bookCopiesService;
         private readonly IBookService bookService;
+        private readonly ILibraryService libraryService;
 
-        public CreateBookCopyModel(IBookCopiesService bookCopiesService, IBookService bookService)
+        public CreateBookCopyModel(IBookCopiesService bookCopiesService, IBookService bookService, ILibraryService libraryService)
         {
             this.bookCopiesService = bookCopiesService;
             this.bookService = bookService;
+            this.libraryService = libraryService;
         }
         [BindProperty]
         public BookCopies BookCopy { get; set; }
         [BindProperty]
         public Book Book { get; set; }
+        public Library Library { get; set; }
+        public IEnumerable<SelectListItem> SelectLibrary { get; set; }
         public IActionResult OnGet(int id)
         {
             Book = bookService.GetBookById(id);
@@ -30,16 +35,16 @@ namespace WebApp
             {
                 return RedirectToPage("NotFound");
             }
-            if (Book.BookCopies == null)
+
+            BookCopy = new BookCopies();
+
+            SelectLibrary = libraryService.GetLibraries().Select(l => new SelectListItem
             {
-                BookCopy = new BookCopies();
-                return Page();
-            }
-            else 
-            {
-                TempData["Message"] = "Copies of this Book Already Exist!";
-                return RedirectToPage("/Books/BookList");
-            }
+                Text = l.Name,
+                Value = l.Id.ToString()
+            });
+
+            return Page();
             
         }
         public IActionResult OnPost()
@@ -47,13 +52,22 @@ namespace WebApp
             if (ModelState.IsValid)
             {
                 BookCopy.BookId = Book.Id;
-
+                Library = libraryService.GetLibraryById(BookCopy.LibraryId);
                 BookCopy = bookCopiesService.CreateBookCopy(BookCopy);
 
+
+                Library.BookCopies.Add(BookCopy);
                 bookCopiesService.Commit();
-                return RedirectToPage("BookCopiesList", new { id = BookCopy.Id });
+            
+                return RedirectToPage("BookCopiesList");
             }
 
+
+            SelectLibrary = libraryService.GetLibraries().Select(l => new SelectListItem
+            {
+                Text = l.Name,
+                Value = l.Id.ToString()
+            });
             return Page();
         }
     }

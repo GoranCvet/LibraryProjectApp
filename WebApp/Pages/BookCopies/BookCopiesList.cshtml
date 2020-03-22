@@ -36,14 +36,7 @@
             <td>
                 @item.NumberOfCopies
             </td>
-            <td>
-                <a class="btn btn-outline-primary" asp-page="./BookCopyEdit" asp-route-id="@item.Id">
-                    <i class="fas fa-edit"></i>
-                </a>
-                <a class="btn btn-outline-danger" asp-page="./BookCopyDelete" asp-route-id="@item.Id">
-                    <i class="fas fa-trash"></i>
-                </a>
-            </td>
+            
         </tr>
     }
     <tfoot style="visibility:@(!Model.BookCopies.Any() ? "visible" : "hidden")">

@@ -7,17 +7,15 @@ namespace LibraryProject.Domain
 {
     public class BookCopies
     {
-        public BookCopies()
-        {
-            BookCopiesLibraries = new List<BookCopiesLibrary>();
-        }
-        public int Id { get; set; }
+        public Book Book { get; set; }
+        public int BookId { get; set; }
+        public Library Library { get; set; }
+        public int LibraryId { get; set; }
+
         [Required]
         public int NumberOfCopies { get; set; }
 
-        public Book Book { get; set; }
-        public int BookId { get; set; }
+       
 
-        public List<BookCopiesLibrary> BookCopiesLibraries { get; set; }
     }
 }

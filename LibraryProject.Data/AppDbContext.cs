@@ -15,18 +15,17 @@ namespace LibraryProject.Data
         public DbSet<Library> Libraries { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Lending> Lendings { get; set; }
-        public DbSet<BookCopiesLibrary> BookCopiesLibraries { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) :base(options)
         {
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BookCopiesLibrary>().HasKey(bl => new { bl.BookCopiesId, bl.LibraryId });
+            modelBuilder.Entity<BookCopies>().HasKey(bc => new { bc.BookId, bc.LibraryId });
             base.OnModelCreating(modelBuilder);
         }
 
-       
+
 
     }
 }

@@ -25,22 +25,18 @@ namespace LibraryProject.Data.SqlData
         public Lending CreateLending(Lending lending)
         {
 
-            var bookCopy = dbContext.BookCopies.SingleOrDefault(bc => bc.BookId == lending.BookId);
+            var bookCopy = dbContext.BookCopies.SingleOrDefault(bc => bc.BookId == lending.BookId && bc.LibraryId == lending.LibraryId);
 
-            var libraryCopy = dbContext.BookCopiesLibraries
-                .SingleOrDefault(lc => lc.LibraryId == lending.LibraryId && lc.BookCopiesId == bookCopy.Id);
-
-            if (libraryCopy != null && libraryCopy.LibriryCopies != 0)
+            if (bookCopy != null && bookCopy.NumberOfCopies != 0)
             {
                 dbContext.Lendings.Add(lending);
-                libraryCopy.LibriryCopies -= 1;
+                bookCopy.NumberOfCopies -= 1;
                 return lending;
             }
             else
             {
                 return lending = null;
             }
-
         }
 
         public Lending GetLendingById(int id)
@@ -62,10 +58,8 @@ namespace LibraryProject.Data.SqlData
         public Lending ReturnLentBook(Lending lending)
         {
 
-            var bookCopy = dbContext.BookCopies.SingleOrDefault(bc => bc.BookId == lending.BookId);
-            var libraryCopy = dbContext.BookCopiesLibraries
-                .SingleOrDefault(lc => lc.LibraryId == lending.LibraryId && lc.BookCopiesId == bookCopy.Id);
-            libraryCopy.LibriryCopies += 1;
+            var bookCopy = dbContext.BookCopies.SingleOrDefault(bc => bc.BookId == lending.BookId && bc.LibraryId == lending.LibraryId);
+            bookCopy.NumberOfCopies += 1;
             dbContext.Entry(lending).State = EntityState.Modified;
 
             return lending;

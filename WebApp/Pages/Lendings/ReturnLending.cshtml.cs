@@ -12,12 +12,10 @@ namespace WebApp
     public class ReturnLendingModel : PageModel
     {
         private readonly ILendingService lendingService;
-        private readonly IClientService clientService;
 
-        public ReturnLendingModel(ILendingService lendingService, IClientService clientService)
+        public ReturnLendingModel(ILendingService lendingService)
         {
             this.lendingService = lendingService;
-            this.clientService = clientService;
         }
         [BindProperty]
         public Lending Lending { get; set; }
@@ -34,12 +32,12 @@ namespace WebApp
         {
             if (ModelState.IsValid)
             {
-
                 Lending = lendingService.ReturnLentBook(Lending);
                 lendingService.Commit();
                 TempData["Message"] = "Book returned!";
 
-                return RedirectToPage("/Clients/ClientList");
+
+                return RedirectToPage("/Clients/ClientDetails", new { id = Lending.ClientId });
             }
 
             return Page();

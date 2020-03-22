@@ -9,9 +9,10 @@ namespace LibraryProject.Domain
     {
         public Library()
         {
-            BookCopiesLibraries = new List<BookCopiesLibrary>();
             Lendings = new List<Lending>();
+            BookCopies = new List<BookCopies>();
         }
+
         public int Id { get; set; }
         [Required, Display(Name = "Library Name"), StringLength(50, ErrorMessage = "Name length can't be more than 50")]
         public string Name { get; set; }
@@ -20,7 +21,8 @@ namespace LibraryProject.Domain
         [Required]
         public string City { get; set; }
 
-        public List<BookCopiesLibrary> BookCopiesLibraries { get; set; }
+        public List<BookCopies> BookCopies { get; set; }
+
         public List<Lending> Lendings { get; set; }
 
     }

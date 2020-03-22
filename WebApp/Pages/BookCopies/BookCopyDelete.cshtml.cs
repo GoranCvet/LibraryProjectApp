@@ -21,21 +21,21 @@ namespace WebApp
         public BookCopies BookCopy { get; set; }
         public IActionResult OnGet(int id)
         {
-            BookCopy = bookCopiesService.GetBookCopyById(id);
-            if(BookCopy == null)
-            {
-                return RedirectToPage("NotFound");
-            }
+            //BookCopy = bookCopiesService.GetBookCopyById(id);
+            //if(BookCopy == null)
+            //{
+            //    return RedirectToPage("NotFound");
+            //}
             return Page();
         }
 
         public IActionResult OnPost()
         {
-            var temp = bookCopiesService.DeleteCopy(BookCopy.Id);
-            if(temp == null)
-            {
-                return RedirectToPage("NotFound");
-            }
+            //var temp = bookCopiesService.DeleteCopy(BookCopy.Id);
+            //if(temp == null)
+            //{
+            //    return RedirectToPage("NotFound");
+            //}
 
             bookCopiesService.Commit();
 

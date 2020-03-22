@@ -103,18 +103,23 @@ namespace LibraryProject.Data.Migrations
                 name: "BookCopies",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NumberOfCopies = table.Column<int>(nullable: false),
-                    BookId = table.Column<int>(nullable: false)
+                    BookId = table.Column<int>(nullable: false),
+                    LibraryId = table.Column<int>(nullable: false),
+                    NumberOfCopies = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookCopies", x => x.Id);
+                    table.PrimaryKey("PK_BookCopies", x => new { x.BookId, x.LibraryId });
                     table.ForeignKey(
                         name: "FK_BookCopies_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookCopies_Libraries_LibraryId",
+                        column: x => x.LibraryId,
+                        principalTable: "Libraries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -128,7 +133,8 @@ namespace LibraryProject.Data.Migrations
                     DatumZajmuvanje = table.Column<DateTime>(nullable: false),
                     DatumVratena = table.Column<DateTime>(nullable: true),
                     ClientId = table.Column<int>(nullable: false),
-                    BookId = table.Column<int>(nullable: false)
+                    BookId = table.Column<int>(nullable: false),
+                    LibraryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,26 +151,8 @@ namespace LibraryProject.Data.Migrations
                         principalTable: "Clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BookCopiesLibraries",
-                columns: table => new
-                {
-                    BookCopiesId = table.Column<int>(nullable: false),
-                    LibraryId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookCopiesLibraries", x => new { x.BookCopiesId, x.LibraryId });
                     table.ForeignKey(
-                        name: "FK_BookCopiesLibraries_BookCopies_BookCopiesId",
-                        column: x => x.BookCopiesId,
-                        principalTable: "BookCopies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookCopiesLibraries_Libraries_LibraryId",
+                        name: "FK_Lendings_Libraries_LibraryId",
                         column: x => x.LibraryId,
                         principalTable: "Libraries",
                         principalColumn: "Id",
@@ -172,14 +160,8 @@ namespace LibraryProject.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookCopies_BookId",
+                name: "IX_BookCopies_LibraryId",
                 table: "BookCopies",
-                column: "BookId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookCopiesLibraries_LibraryId",
-                table: "BookCopiesLibraries",
                 column: "LibraryId");
 
             migrationBuilder.CreateIndex(
@@ -201,27 +183,29 @@ namespace LibraryProject.Data.Migrations
                 name: "IX_Lendings_ClientId",
                 table: "Lendings",
                 column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Lendings_LibraryId",
+                table: "Lendings",
+                column: "LibraryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BookCopiesLibraries");
+                name: "BookCopies");
 
             migrationBuilder.DropTable(
                 name: "Lendings");
 
             migrationBuilder.DropTable(
-                name: "BookCopies");
-
-            migrationBuilder.DropTable(
-                name: "Libraries");
+                name: "Books");
 
             migrationBuilder.DropTable(
                 name: "Clients");
 
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "Libraries");
 
             migrationBuilder.DropTable(
                 name: "Authors");

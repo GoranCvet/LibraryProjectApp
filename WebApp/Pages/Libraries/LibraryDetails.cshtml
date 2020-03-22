@@ -21,14 +21,14 @@
             </th>
         </tr>
     </thead>
-    @foreach(var item in Model.BookCopiesLibraries.Where(bc => bc.LibraryId == Model.Library.Id))
+    @foreach(var item in Model.Library.BookCopies.Where(bc => bc.LibraryId == Model.Library.Id))
     {
         <tr>
             <td>
-                @item.BookCopies.Book.Title
+                @item.Book.Title
             </td>
             <td>
-                @item.LibriryCopies
+                @item.NumberOfCopies
             </td>
         </tr>
     }

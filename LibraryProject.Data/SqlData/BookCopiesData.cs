@@ -22,11 +22,11 @@ namespace LibraryProject.Data.SqlData
         {
             return dbContext.SaveChanges();
         }
-        public BookCopies GetBookCopyById(int id)
-        {
-            return dbContext.BookCopies.Include(bc => bc.Book)
-                 .SingleOrDefault(bc => bc.Id == id);
-        }
+        //public BookCopies GetBookCopyById(int id)
+        //{
+        //    return dbContext.BookCopies.Include(bc => bc.Book)
+        //         .SingleOrDefault(bc => bc.Id == id);
+        //}
 
         public IEnumerable<BookCopies> GetBookCopies()
         {
@@ -41,21 +41,21 @@ namespace LibraryProject.Data.SqlData
             return temp.Entity;
         }
 
-        public BookCopies DeleteCopy(int id)
-        {
-            var temp = dbContext.BookCopies.SingleOrDefault(bc => bc.Id == id);
-            if(temp != null)
-            {
-                dbContext.BookCopies.Remove(temp);
-            }
+        //public BookCopies DeleteCopy(int id)
+        //{
+        //    var temp = dbContext.BookCopies.SingleOrDefault(bc => bc.Id == id);
+        //    if(temp != null)
+        //    {
+        //        dbContext.BookCopies.Remove(temp);
+        //    }
 
-            return temp;
-        }
+        //    return temp;
+        //}
 
-        public BookCopies UpdateCopy(BookCopies bookCopy)
-        {
-            dbContext.Entry(bookCopy).State = EntityState.Modified;
-            return bookCopy;
-        }
+        //public BookCopies UpdateCopy(BookCopies bookCopy)
+        //{
+        //    dbContext.Entry(bookCopy).State = EntityState.Modified;
+        //    return bookCopy;
+        //}
     }
 }

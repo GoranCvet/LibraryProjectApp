@@ -36,8 +36,6 @@ namespace WebApp
             services.AddScoped<IClientService, ClientData>();
             services.AddScoped<ILendingService, LendingData>();
             services.AddScoped<ILibraryService, LibraryData>();
-            services.AddScoped<IBookCopiesLibraryService, BookCopiesLibraryData>();
-
 
         }
 

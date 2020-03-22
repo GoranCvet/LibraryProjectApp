@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryProject.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200313175200_BookCopiesLibraryChanges")]
-    partial class BookCopiesLibraryChanges
+    [Migration("20200322093238_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,41 +89,20 @@ namespace LibraryProject.Data.Migrations
 
             modelBuilder.Entity("LibraryProject.Domain.BookCopies", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("BookId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumberOfCopies")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BookId")
-                        .IsUnique();
-
-                    b.ToTable("BookCopies");
-                });
-
-            modelBuilder.Entity("LibraryProject.Domain.BookCopiesLibrary", b =>
-                {
-                    b.Property<int>("BookCopiesId")
                         .HasColumnType("int");
 
                     b.Property<int>("LibraryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LibriryCopies")
+                    b.Property<int>("NumberOfCopies")
                         .HasColumnType("int");
 
-                    b.HasKey("BookCopiesId", "LibraryId");
+                    b.HasKey("BookId", "LibraryId");
 
                     b.HasIndex("LibraryId");
 
-                    b.ToTable("BookCopiesLibraries");
+                    b.ToTable("BookCopies");
                 });
 
             modelBuilder.Entity("LibraryProject.Domain.Client", b =>
@@ -171,11 +150,16 @@ namespace LibraryProject.Data.Migrations
                     b.Property<DateTime>("DatumZajmuvanje")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("LibraryId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BookId");
 
                     b.HasIndex("ClientId");
+
+                    b.HasIndex("LibraryId");
 
                     b.ToTable("Lendings");
                 });
@@ -243,22 +227,13 @@ namespace LibraryProject.Data.Migrations
             modelBuilder.Entity("LibraryProject.Domain.BookCopies", b =>
                 {
                     b.HasOne("LibraryProject.Domain.Book", "Book")
-                        .WithOne("BookCopies")
-                        .HasForeignKey("LibraryProject.Domain.BookCopies", "BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("LibraryProject.Domain.BookCopiesLibrary", b =>
-                {
-                    b.HasOne("LibraryProject.Domain.BookCopies", "BookCopies")
-                        .WithMany("BookCopiesLibraries")
-                        .HasForeignKey("BookCopiesId")
+                        .WithMany("BookCopies")
+                        .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LibraryProject.Domain.Library", "Library")
-                        .WithMany("BookCopiesLibraries")
+                        .WithMany("BookCopies")
                         .HasForeignKey("LibraryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -275,6 +250,12 @@ namespace LibraryProject.Data.Migrations
                     b.HasOne("LibraryProject.Domain.Client", "Client")
                         .WithMany("Lendings")
                         .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("LibraryProject.Domain.Library", "Library")
+                        .WithMany("Lendings")
+                        .HasForeignKey("LibraryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

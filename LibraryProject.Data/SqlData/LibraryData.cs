@@ -47,8 +47,7 @@ namespace LibraryProject.Data.SqlData
         public Library GetLibraryById(int id)
         {
             return dbContext.Libraries
-                .Include(lb => lb.BookCopiesLibraries)
-                .ThenInclude(bl => bl.BookCopies)
+                .Include(bl => bl.BookCopies)
                 .ThenInclude(bc => bc.Book)
                 .OrderBy(lb => lb.Name)
                 .SingleOrDefault(lb => lb.Id == id);

@@ -12,18 +12,12 @@ namespace WebApp
     public class LibraryDetailsModel : PageModel
     {
         private readonly ILibraryService libraryService;
-        private readonly IBookCopiesService bookCopiesService;
-        private readonly IBookCopiesLibraryService bookCopiesLibraryService;
 
-        public LibraryDetailsModel(ILibraryService libraryService, IBookCopiesService bookCopiesService
-            ,IBookCopiesLibraryService bookCopiesLibraryService)
+        public LibraryDetailsModel(ILibraryService libraryService)
         {
             this.libraryService = libraryService;
-            this.bookCopiesService = bookCopiesService;
-            this.bookCopiesLibraryService = bookCopiesLibraryService;
         }
         public Library Library { get; set; }
-        public IEnumerable<BookCopiesLibrary> BookCopiesLibraries { get; set; }
         public IActionResult OnGet(int id)
         {
             Library = libraryService.GetLibraryById(id);
@@ -31,7 +25,6 @@ namespace WebApp
             {
                 return RedirectToPage("NotFound");
             }
-            BookCopiesLibraries = bookCopiesLibraryService.Get();
             return Page();
         }
 

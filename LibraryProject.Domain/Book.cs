@@ -10,6 +10,7 @@ namespace LibraryProject.Domain
         public Book()
         {
             Lendings = new List<Lending>();
+            BookCopies = new List<BookCopies>();
         }
         public int Id { get; set; }
         [Required, Display(Name = "Book Title")]
@@ -26,8 +27,8 @@ namespace LibraryProject.Domain
         public Publisher Publisher { get; set; }
         [Display(Name = "Publihser")]
         public int PublisherId { get; set; }
-        public BookCopies BookCopies { get; set; }
 
         public List<Lending> Lendings { get; set; }
+        public List<BookCopies> BookCopies { get; set; }
     }
 }

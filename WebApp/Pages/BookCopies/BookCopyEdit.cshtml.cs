@@ -21,7 +21,7 @@ namespace WebApp
         public BookCopies BookCopy { get; set; }
         public IActionResult OnGet(int id)
         {
-            BookCopy = bookCopiesService.GetBookCopyById(id);
+            //BookCopy = bookCopiesService.GetBookCopyById(id);
             if(BookCopy == null)
             {
                 return RedirectToPage("NotFound");
@@ -33,7 +33,7 @@ namespace WebApp
         {
             if (ModelState.IsValid)
             {
-                BookCopy = bookCopiesService.UpdateCopy(BookCopy);
+                //BookCopy = bookCopiesService.UpdateCopy(BookCopy);
                 bookCopiesService.Commit();
 
                 TempData["Message"] = $"Changes in copies applied!";
