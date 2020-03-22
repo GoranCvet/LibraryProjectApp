@@ -15,6 +15,9 @@
                 Book Title
             </th>
             <th>
+                Lent From
+            </th>
+            <th>
                 Date Lent
             </th>
             <th>
@@ -32,6 +35,9 @@
                 <tr>
                     <td>
                         @item.Book.Title
+                    </td>
+                    <td>
+                        @item.Library.Name
                     </td>
                     <td>
                         @item.DatumZajmuvanje.Day / @item.DatumZajmuvanje.Month / @item.DatumZajmuvanje.Year

@@ -41,6 +41,8 @@ namespace LibraryProject.Data.SqlData
         public Client GetClientById(int id)
         {
             return dbContext.Clients
+                .Include(c => c.Lendings)
+                .ThenInclude(l => l.Library)
                 .SingleOrDefault(c => c.Id == id);
         }
 
