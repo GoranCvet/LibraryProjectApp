@@ -9,9 +9,9 @@ namespace LibraryProject.Data.IServices
     {
         IEnumerable<BookCopies> GetBookCopies();
         int Commit();
-        //BookCopies GetBookCopyById(int id);
+        BookCopies GetBookCopyById(int bookId, int libraryId);
         BookCopies CreateBookCopy(BookCopies bookCopy);
-        //BookCopies DeleteCopy(int id);
+        BookCopies DeleteCopy(int bookId, int libraryId);
         //BookCopies UpdateCopy(BookCopies bookCopy);
     }
 }

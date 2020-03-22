@@ -69,7 +69,7 @@ namespace WebApp
                 if(Lending == null)
                 {
                     TempData["Message"] = "There are not book copies available!";
-                    return RedirectToPage("LendingList");
+                    return RedirectToPage("/Lendings/LendingList");
                 }
 
                 lendingService.Commit();

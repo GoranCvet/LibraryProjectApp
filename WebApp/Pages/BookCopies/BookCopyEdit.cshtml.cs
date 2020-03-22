@@ -12,6 +12,7 @@ namespace WebApp
     public class BookCopyEditModel : PageModel
     {
         private readonly IBookCopiesService bookCopiesService;
+        private readonly ILibraryService libraryService;
 
         public BookCopyEditModel(IBookCopiesService bookCopiesService)
         {
@@ -19,14 +20,13 @@ namespace WebApp
         }
         [BindProperty]
         public BookCopies BookCopy { get; set; }
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int bookId, int libraryId)
         {
-            //BookCopy = bookCopiesService.GetBookCopyById(id);
-            if(BookCopy == null)
+            BookCopy = bookCopiesService.GetBookCopyById(bookId, libraryId);
+            if (BookCopy == null)
             {
                 return RedirectToPage("NotFound");
             }
-
             return Page();
         }
         public IActionResult OnPost()
