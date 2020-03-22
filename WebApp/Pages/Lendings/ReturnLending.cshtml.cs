@@ -12,13 +12,16 @@ namespace WebApp
     public class ReturnLendingModel : PageModel
     {
         private readonly ILendingService lendingService;
+        private readonly ILibraryService libraryService;
 
-        public ReturnLendingModel(ILendingService lendingService)
+        public ReturnLendingModel(ILendingService lendingService, ILibraryService libraryService)
         {
             this.lendingService = lendingService;
+            this.libraryService = libraryService;
         }
         [BindProperty]
         public Lending Lending { get; set; }
+        public Library Library { get; set; }
         public IActionResult OnGet(int id)
         {
             Lending = lendingService.GetLendingById(id);
@@ -26,6 +29,7 @@ namespace WebApp
             {
                 return RedirectToPage("NotFound");
             }
+            Library = libraryService.GetLibraryById(Lending.LibraryId);
             return Page();
         }
         public IActionResult OnPost()
