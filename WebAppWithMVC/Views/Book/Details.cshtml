@@ -1,9 +1,7 @@
-﻿@page "{id:int}"
-@model WebApp.BookDetailsModel
+﻿@model WebAppWithMVC.Models.Books.BookDetailsViewModel
 @{
-    ViewData["Title"] = "BookDetails";
+    ViewData["Title"] = "Details";
     var bookPhoto = "~/images/bookImages/" + (Model.Book.BookPhoto ?? "nobook.png");
-
 }
 
 <h2>Book Details</h2>
@@ -12,10 +10,10 @@
 
     <div class="col-sm-7">
 
-        @if (!string.IsNullOrEmpty(Model.Message))
+        @if (TempData.Keys.Contains("Message"))
         {
             <div class="alert alert-info">
-                @Model.Message
+                @TempData["Message"]
             </div>
         }
 
@@ -61,7 +59,7 @@
                 </td>
             </tr>
             <tr>
-               
+
             <tr>
                 <td class="font-weight-bold">
                     Book Description
@@ -74,12 +72,12 @@
         </table>
 
         <div class="form-group">
-            <a class="btn btn-light" asp-page="/BookCopies/CreateBookCopy" asp-route-id="@Model.Book.Id">Create a Copy</a>
+            <a class="btn btn-light" asp-action="" asp-route-id="@Model.Book.Id">Create a Copy</a>
         </div>
 
         <div class="form-group">
-            <a class="btn btn-primary" asp-page="./BookEdit" asp-route-id="@Model.Book.Id">Edit</a>
-            <a class="btn btn-primary" asp-page="./BookList">Back</a>
+            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Book.Id">Edit</a>
+            <a class="btn btn-primary" asp-action="Index">Back</a>
         </div>
 
     </div>
@@ -88,4 +86,3 @@
     </div>
 
 </div>
-

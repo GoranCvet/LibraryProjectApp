@@ -1,0 +1,56 @@
+﻿@model WebAppWithMVC.Models.Authors.AuthorDetailsViewModel
+@{
+    ViewData["Title"] = "Details";
+    var authorPhoto = "~/images/authorImages/" + (Model.Author.AuthorPhoto ?? "noauthor.png");
+}
+
+<h2>Author Details</h2>
+
+<div class="row">
+    <div class="col-sm-6">
+        <table class="table">
+            <tr>
+                <td class="font-weight-bold">
+                    Author Name
+                </td>
+                <td>
+                    @Model.Author.Name
+                </td>
+            </tr>
+            <tr>
+                <td class="font-weight-bold">
+                    Country
+                </td>
+                <td>
+                    @Model.Author.Country
+                </td>
+            </tr>
+            <tr>
+                <td class="font-weight-bold">
+                    About
+                </td>
+                <td>
+                    @Model.Author.AuthorBio
+                </td>
+            </tr>
+
+        </table>
+        <div class="form-group">
+            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Author.Id">Edit</a>
+            <a class="btn btn-primary" asp-action="Index" >Authors List</a>
+        </div>
+
+        @if (TempData.Keys.Contains("Message"))
+        {
+            <div class="alert alert-info">
+                @TempData["Message"]
+            </div>
+        }
+
+    </div>
+    <div class="col-sm-5">
+        <img src="@authorPhoto" alt="" class="img-fluid" asp-append-version="true" />
+    </div>
+
+</div>
+

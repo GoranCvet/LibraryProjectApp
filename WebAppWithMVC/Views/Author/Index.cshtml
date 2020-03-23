@@ -1,0 +1,72 @@
+﻿@model WebAppWithMVC.Models.Authors.AuthorsIndexViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>List of Authors</h2>
+
+<form method="get">
+
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search Author" asp-for="@Model.SearchAuthor">
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<a class="btn btn-primary mb-2" asp-action="Edit">Create Author</a>
+
+@if (!string.IsNullOrEmpty(Model.Message))
+{
+    <div class="alert alert-info">
+        @Model.Message
+    </div>
+}
+@if (Model.Authors.Count() == 0)
+{
+    <p class="mt-3">No Authors Added</p>
+}
+
+
+<div class="row">
+
+    @foreach (var item in Model.Authors)
+    {
+        var photo = "~/images/authorImages/" + (item.AuthorPhoto ?? "noauthor.png");
+
+        <div class="col-sm-3">
+
+            <div class="card mb-2">
+
+                <div class="card-header text-center font-weight-bold">
+                    @item.Name
+                </div>
+
+                <div class="card-body">
+                    <img src="@photo" class="card-img-top myImage" asp-append-version="true" />
+                </div>
+
+                <div class="card-footer text-center">
+                    <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.Id">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline">
+                        <button type="submit" onclick="return confirm('Do you Really want to Delete Author?') "class="btn btn-outline-danger" >
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>
