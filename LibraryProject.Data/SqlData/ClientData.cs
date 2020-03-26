@@ -43,6 +43,8 @@ namespace LibraryProject.Data.SqlData
             return dbContext.Clients
                 .Include(c => c.Lendings)
                 .ThenInclude(l => l.Library)
+                .ThenInclude(l => l.BookCopies) // Ova ->
+                .ThenInclude(bc => bc.Book) // I ova mi treba za da mozam da gi prikazam podatocite vo MVC
                 .SingleOrDefault(c => c.Id == id);
         }
 

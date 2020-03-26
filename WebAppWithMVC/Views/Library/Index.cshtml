@@ -1,0 +1,64 @@
+﻿@model WebAppWithMVC.Models.Libraries.LibraryIndexViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>List of Libraries</h2>
+
+<a class="btn btn-primary mb-2" asp-action="Edit">Create Library</a>
+
+@if (TempData.Keys.Contains("Message"))
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                City
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Libraries)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Address
+            </td>
+            <td>
+                @item.City
+            </td>
+            <td>
+                <a class="btn btn-outline-primary" asp-action="Details" asp-route-id="@item.Id">Info</a>
+                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <form asp-action="Delete" asp-route-id="@item.Id" method="post" class="d-inline">
+                    <button type="submit" onclick="return confirm('Do you really want to Delete the Library?')" class="btn btn-outline-danger">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+
+
+</table>
+
+@if (Model.Libraries.Count() == 0)
+{
+    <div class="alert">
+        No Libraries Added
+    </div>
+}

@@ -1,0 +1,45 @@
+﻿@model LibraryProject.Domain.Lending
+@{
+    ViewData["Title"] = "ReturnLending";
+}
+
+<h2>Return Book Confimation</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="@Model.Id" />
+    <input type="hidden" asp-for="@Model.BookId" />
+    <input type="hidden" asp-for="@Model.ClientId" />
+    <input type="hidden" asp-for="@Model.LibraryId" />
+
+    <div class="form-group">
+        <label asp-for="@Model.Book.Title"></label>
+        <input class="form-control" asp-for="@Model.Book.Title" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Library.Name"></label>
+        <input class="form-control" asp-for="@Model.Library.Name" readonly />
+        <input type="hidden" asp-for="@Model.Library.City" />
+        <input type="hidden" asp-for="@Model.Library.Address" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.DatumZajmuvanje"></label>
+        <input class="form-control" asp-for="@Model.DatumZajmuvanje" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.DatumVratena"></label>
+        <input class="form-control" asp-for="@Model.DatumVratena" />
+    </div>
+
+    <input type="hidden" asp-for="@Model.Book.BookDescription" />
+    <span asp-validation-for="@Model.Book.BookDescription"></span>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Confirm</button>
+        <a class="btn btn-primary" asp-controller="Client" asp-action="Details"  asp-route-id="@Model.ClientId">Back</a>
+    </div>
+
+</form>

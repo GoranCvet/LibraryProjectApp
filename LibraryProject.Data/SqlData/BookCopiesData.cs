@@ -28,6 +28,7 @@ namespace LibraryProject.Data.SqlData
         {
             return dbContext.BookCopies
                 .Include(bc => bc.Book)
+                .Include(bc => bc.Library)
                 .ToList();
         }
 
@@ -53,10 +54,10 @@ namespace LibraryProject.Data.SqlData
             return temp;
         }
 
-        //public BookCopies UpdateCopy(BookCopies bookCopy)
-        //{
-        //    dbContext.Entry(bookCopy).State = EntityState.Modified;
-        //    return bookCopy;
-        //}
+        public BookCopies UpdateCopy(BookCopies bookCopy)
+        {
+            dbContext.Entry(bookCopy).State = EntityState.Modified;
+            return bookCopy;
+        }
     }
 }

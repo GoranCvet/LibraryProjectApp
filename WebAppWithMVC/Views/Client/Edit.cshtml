@@ -1,0 +1,40 @@
+﻿@model LibraryProject.Domain.Client
+@{
+    ViewData["Title"] = "Edit";
+    var CreateEdit = Model.Id > 0 ? "Edit" : "Create";
+
+}
+
+<h2>@CreateEdit Client</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input class="form-control" asp-for="Phone" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input class="form-control" asp-for="Address" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="City"></label>
+        <input class="form-control" asp-for="City" />
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn btn-primary" asp-action="Index">Back</a>
+    </div>
+
+</form>

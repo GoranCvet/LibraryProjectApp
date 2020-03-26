@@ -33,10 +33,10 @@ namespace WebApp
         {
             if (ModelState.IsValid)
             {
-                //BookCopy = bookCopiesService.UpdateCopy(BookCopy);
+                BookCopy = bookCopiesService.UpdateCopy(BookCopy);
                 bookCopiesService.Commit();
 
-                TempData["Message"] = $"Changes in copies applied!";
+                TempData["Message"] = "Changes in copies applied!";
 
                 return RedirectToPage("BookCopiesList");
             }

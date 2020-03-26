@@ -1,0 +1,50 @@
+﻿@model WebAppWithMVC.Models.BookCopies.BookCopiesViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Book Copies List</h2>
+
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>
+                Book Title
+            </th>
+            <th>
+                Number Of Copies
+            </th>
+            <th>
+                Library
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.BookCopies)
+    {
+        <tr>
+            <td>
+                @item.Book.Title
+            </td>
+            <td>
+                @item.NumberOfCopies
+            </td>
+            <td>
+                @item.Library.Name
+            </td>
+
+        </tr>
+    }
+    <tfoot style="visibility:@(!Model.BookCopies.Any() ? "visible" : "hidden")">
+        <tr>
+            <td colspan="3">
+                Nothing to display.
+            </td>
+        </tr>
+    </tfoot>
+
+
+</table>

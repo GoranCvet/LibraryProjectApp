@@ -1,0 +1,22 @@
+﻿@model LibraryProject.Domain.BookCopies
+@{
+    ViewData["Title"] = "EditCopyInLibrary";
+}
+
+<h2>Change number of Copies</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="@Model.BookId" />
+    <input type="hidden" asp-for="@Model.LibraryId" />
+
+    <div class="form-group">
+        <label asp-for="NumberOfCopies"></label>
+        <input class="form-control" asp-for="NumberOfCopies" />
+        <span asp-validation-for="NumberOfCopies" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Edit</button>
+        <a class="btn btn-primary" asp-controller="Library" asp-action="Details" asp-route-id="@Model.LibraryId">Back</a>
+    </div>
+</form>

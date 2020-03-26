@@ -1,0 +1,56 @@
+﻿@model WebAppWithMVC.Models.Libraries.LibraryDetailsViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Available books in Library @Model.Library.Name</h2>
+
+
+<a class="btn btn-primary mb-2" asp-action="" asp-route-id="@Model.Library.Id">Add Book</a>
+
+@if (TempData.Keys.Contains("Message"))
+{
+    <div class="alert alert-info">
+        @TempData["Message"]
+    </div>
+}
+
+
+<table class="table">
+
+    <thead>
+        <tr>
+            <th>
+                Book Title
+            </th>
+            <th>
+                Copies in Library
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Library.BookCopies.Where(bc => bc.LibraryId == Model.Library.Id))
+    {
+        <tr>
+            <td>
+                @item.Book.Title
+            </td>
+            <td>
+                @item.NumberOfCopies
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-controller="BookCopies" asp-action="EditCopyInLibrary" asp-route-bookId="@item.BookId" asp-route-libraryId="@item.LibraryId">Edit</a>
+                <form asp-action="DeleteBookCopy" asp-route-bookId="@item.BookId" asp-route-libraryId="@item.LibraryId" method="post" class="d-inline">
+                    <button type="submit" onclick="return confirm('DO you really want to Remove copy from Library ? ');" class="btn btn-danger">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </td>
+
+        </tr>
+    }
+
+
+</table>

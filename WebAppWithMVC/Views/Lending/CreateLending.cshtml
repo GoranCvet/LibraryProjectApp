@@ -1,0 +1,46 @@
+﻿@model WebAppWithMVC.Models.Lendings.LendingCreateViewModel
+@{
+    ViewData["Title"] = "CreateLending";
+}
+
+<h2>Create New Lending</h2>
+
+
+<form method="post">
+
+    <input type="hidden" asp-for="@Model.Lending.Id" />
+    
+
+
+    <div class="form-group">
+        <label asp-for="@Model.Lending.ClientId"></label>
+        <select class="form-control" asp-for="@Model.Lending.ClientId" asp-items="@Model.SelectClient">
+            <option value="">Select Client</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Lending.BookId"></label>
+        <select class="form-control" asp-for="@Model.Lending.BookId" asp-items="@Model.SelectBook">
+            <option value="">Select Book</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Lending.LibraryId"></label>
+        <select class="form-control" asp-for="@Model.Lending.LibraryId" asp-items="@Model.SelectLibrary">
+            <option value="">Select Library</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Lending.DatumZajmuvanje"></label>
+        <input class="form-control" asp-for="@Model.Lending.DatumZajmuvanje" />
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn btn-primary" asp-controller="Client" asp-action="Details" asp-route-id="@Model.Client.Id">Cancel</a>
+    </div>
+
+</form>

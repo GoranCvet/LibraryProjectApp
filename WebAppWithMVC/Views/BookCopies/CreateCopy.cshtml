@@ -1,0 +1,41 @@
+﻿@model WebAppWithMVC.Models.BookCopies.CreateCopyViewModel
+@{
+    ViewData["Title"] = "CreateCopy";
+}
+
+<h2>Create a Book Copy of @Model.Book.Title</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Book.Id" />
+
+    <div class="form-group">
+        <label asp-for="Book.Title"></label>
+        <input class="form-control" asp-for="Book.Title" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Book.BookDescription"></label>
+        <textarea class="form-control" rows="5" asp-for="Book.BookDescription" readonly></textarea>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BookCopy.LibraryId"></label>
+        <select class="form-control" asp-for="BookCopy.LibraryId" asp-items="@Model.SelectLibrary">
+            <option value="">Select Library</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BookCopy.NumberOfCopies"></label>
+        <input class="form-control" asp-for="BookCopy.NumberOfCopies" />
+        <span asp-validation-for="BookCopy.NumberOfCopies" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a class="btn btn-primary" asp-controller="Book" asp-action="Details" asp-route-id="@Model.Book.Id">Cancel</a>
+    </div>
+</form>
+

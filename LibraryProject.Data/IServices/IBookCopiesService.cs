@@ -12,6 +12,6 @@ namespace LibraryProject.Data.IServices
         BookCopies GetBookCopyById(int bookId, int libraryId);
         BookCopies CreateBookCopy(BookCopies bookCopy);
         BookCopies DeleteCopy(int bookId, int libraryId);
-        //BookCopies UpdateCopy(BookCopies bookCopy);
+        BookCopies UpdateCopy(BookCopies bookCopy);
     }
 }
