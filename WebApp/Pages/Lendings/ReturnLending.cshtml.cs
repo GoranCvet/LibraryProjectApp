@@ -30,6 +30,7 @@ namespace WebApp
                 return RedirectToPage("NotFound");
             }
             Library = libraryService.GetLibraryById(Lending.LibraryId);
+            Lending.DatumVratena = DateTime.Now;
             return Page();
         }
         public IActionResult OnPost()

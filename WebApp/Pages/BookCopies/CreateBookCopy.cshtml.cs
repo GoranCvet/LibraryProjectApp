@@ -37,12 +37,8 @@ namespace WebApp
             }
 
             BookCopy = new BookCopies();
-
-            SelectLibrary = libraryService.GetLibraries().Select(l => new SelectListItem
-            {
-                Text = l.Name,
-                Value = l.Id.ToString()
-            });
+            
+            SelectLibrary = FilterList();
 
             return Page();
             
@@ -62,13 +58,26 @@ namespace WebApp
                 return RedirectToPage("BookCopiesList");
             }
 
-
-            SelectLibrary = libraryService.GetLibraries().Select(l => new SelectListItem
+            SelectLibrary = FilterList();
+            return Page();
+        }
+        private IEnumerable<SelectListItem> FilterList()
+        {
+            var list = libraryService.GetLibraries();
+            var library = new List<Library>();
+            foreach (var item in list)
+            {
+                if (!item.BookCopies.Any(bc => bc.BookId == Book.Id))
+                {
+                    library.Add(item);
+                }
+            }
+            var selectListItem = library.Select(l => new SelectListItem
             {
                 Text = l.Name,
                 Value = l.Id.ToString()
             });
-            return Page();
+            return selectListItem;
         }
     }
 }

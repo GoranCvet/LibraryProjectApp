@@ -4,21 +4,24 @@
         ViewData["Title"] = "AddBook";
 }
 
-<h2>Add Book to Library</h2>
+<h2>Add Book to @Model.Library.Name Library</h2>
 
-@*<form method="post">
+<form method="post">
 
-    <input type="hidden" asp-for="BookCopiesLibrary.LibraryId" />
+    <input type="hidden" asp-for="@Model.Library.Id" />
+    <input type="hidden" asp-for="@Model.Library.Name" />
+    <input type="hidden" asp-for="@Model.Library.City" />
+    <input type="hidden" asp-for="@Model.Library.Address" />
 
     <div class="form-group">
-        <label asp-for="BookCopiesLibrary.BookCopiesId"></label>
-        <select class="form-control" asp-for="BookCopiesLibrary.BookCopiesId" asp-items="@Model.SelectBook">
+        <label asp-for="BookCopy.BookId"></label>
+        <select class="form-control" asp-for="BookCopy.BookId" asp-items="@Model.SelectBook">
             <option value="">Select Book</option>
         </select>
     </div>
     <div class="form-group">
-        <label asp-for="BookCopiesLibrary.LibriryCopies"></label>
-        <input class="form-control" asp-for="BookCopiesLibrary.LibriryCopies" />
+        <label asp-for="BookCopy.NumberOfCopies"></label>
+        <input class="form-control" asp-for="BookCopy.NumberOfCopies" />
     </div>
 
     <div class="form-group">
@@ -26,5 +29,5 @@
         <a class="btn btn-primary" asp-page="./LibrariesList">Back</a>
     </div>
 
-</form>*@
+</form>
 

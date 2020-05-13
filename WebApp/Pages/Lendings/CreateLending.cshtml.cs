@@ -25,6 +25,8 @@ namespace WebApp
             this.libraryService = libraryService;
         }
         [BindProperty]
+        public DateTime DateTime { get; set; }
+        [BindProperty]
         public Lending Lending { get; set; }
         public IEnumerable<SelectListItem> SelectBook { get; set; }
         public IEnumerable<SelectListItem> SelectClient { get; set; }
@@ -34,6 +36,7 @@ namespace WebApp
         public IActionResult OnGet(int? id)
         {
             Lending = new Lending();
+            Lending.DatumZajmuvanje = DateTime.Now;
 
             if (id.HasValue)
             {
@@ -56,6 +59,7 @@ namespace WebApp
                 Text = l.Name,
                 Value = l.Id.ToString()
             });
+
 
             return Page();
         }
