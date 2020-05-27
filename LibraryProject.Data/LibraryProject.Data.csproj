@@ -15,11 +15,19 @@
     <Compile Remove="Migrations\20200322093122_ChangesToBookCopies.Designer.cs" />
     <Compile Remove="Migrations\20200514115349_nullableTitleAuthorId.cs" />
     <Compile Remove="Migrations\20200514115349_nullableTitleAuthorId.Designer.cs" />
+    <Compile Remove="Migrations\20200527072655_AddIdentity.cs" />
+    <Compile Remove="Migrations\20200527072655_AddIdentity.Designer.cs" />
+    <Compile Remove="Migrations\20200527080650_AddIdentityUser.cs" />
+    <Compile Remove="Migrations\20200527080650_AddIdentityUser.Designer.cs" />
+    <Compile Remove="Migrations\20200527080918_AddIdentityUser.cs" />
+    <Compile Remove="Migrations\20200527080918_AddIdentityUser.Designer.cs" />
+    <Compile Remove="Migrations\20200527115500_AppUserDomain.cs" />
+    <Compile Remove="Migrations\20200527115500_AppUserDomain.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

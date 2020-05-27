@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@model IEnumerable<LibraryProject.Domain.Authentication.AppUser>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Users Management</h2>
+
+@if (!Model.Any())
+{
+    <tr>
+    <td colspan="3" class="text-center">No User Accounts</td>
+    </tr>
+}
+else
+	{
+	    <table class="table table-bordered">
+            <tr>
+                <th>
+                    User Id
+                </th>
+                <th>
+                    User Name
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="EditUser" asp-route-id="@item.Id"> Edit</a>
+                        <form asp-action="DeleteUser" asp-route-userId="@item.Id" method="post" class="d-inline">
+                            <button type="submit" onclick="return confirm('Do you really want to delete this user?');" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </table>
+	}
+
+<div class="form-group">
+    <a class="btn btn-primary" asp-action="AddUser">Add new user</a>
+</div>
