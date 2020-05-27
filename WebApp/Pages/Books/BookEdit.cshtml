@@ -19,15 +19,40 @@
         <span asp-validation-for="Book.Title" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="Book.AuthorId"></label>
-        <select class="form-control" asp-for="Book.AuthorId" asp-items="@Model.SelectAuthor">
-            <option value="">
-                Select Author
-            </option>
-        </select>
-    </div>
+    @*<div class="form-group">
+            <label asp-for="Book.AuthorId"></label>
+            <select class="form-control" asp-for="Book.AuthorId" asp-items="@Model.SelectAuthor">
+                <option value="">
+                    Select Author
+                </option>
+            </select>
+        </div>*@
+    <div class="row">
+        <div class="form-group author1 col-sm-9">
+            <label asp-for="TitleAuthor1.AuthorId"></label>
+            <select class="form-control" id="select" asp-for="TitleAuthor1.AuthorId" asp-items="@Model.SelectAuthor">
+                <option value="">Select Author</option>
+            </select>
+        </div>
+        <div class="form-check col-sm-2 mt-3 pt-4">
+            <label>Multiple Authors ?</label>
+        </div>
+        <div class="col-sm-1 mt-3 pt-4" >
+            <input type="checkbox" id="check" onclick="showHide()" asp-for="@Model.MultipleSelection" />
+        </div>
 
+        <div class="form-group col-sm-9" id="author1">
+            <select class="form-control" asp-for="TitleAuthor2.AuthorId" asp-items="@Model.SelectAuthor">
+                <option value="">Select Author</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-9" id="author2">
+            <select class="form-control" asp-for="TitleAuthor3.AuthorId" asp-items="@Model.SelectAuthor">
+                <option value="">Select Author</option>
+            </select>
+        </div>
+    </div>
+ 
     <div class="form-group">
         <label asp-for="Book.BookDescription"></label>
         <textarea class="form-control" rows="5" asp-for="Book.BookDescription"></textarea>
@@ -69,6 +94,32 @@
     </div>
 
     @section Scripts {
+        @*<script>
+                $('#check').click(function () {
+                    $('.multipleAuthor')[!this.checked ? "hide" : "show"]();
+                });
+            </script>*@
+        <script>
+            let checkbox = document.getElementById("check"),
+                author1 = document.getElementById("author1"),
+                author2 = document.getElementById("author2");
+
+            author1.style.display = 'none';
+            author2.style.display = 'none';
+
+            function showHide() {
+
+                if (checkbox.checked == true) {
+                    author1.style.display = 'block';
+                    author2.style.display = 'block';
+                } else {
+                    author1.style.display = 'none';
+                    author2.style.display = 'none';
+                }
+            }
+
+        </script>
+
         <script>
             $(document).ready(function () {
                 $('.custom-file-input').on("change", function () {
@@ -77,6 +128,7 @@
                 });
             });
         </script>
+
     }
 
 </form>

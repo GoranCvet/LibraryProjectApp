@@ -28,14 +28,27 @@
                     @Model.Book.Title
                 </td>
             </tr>
-            <tr>
+            @*<tr>
                 <td class="font-weight-bold">
                     Author
                 </td>
                 <td>
                     @Model.Book.Author.Name
                 </td>
-            </tr>
+            </tr>*@
+            <tr>
+                <td class="font-weight-bold">
+                    Authors
+                </td>
+                @foreach(var item in Model.Book.TitleAuthors)
+                {
+                    <td class="d-block border-0">
+                        @item.Author.Name
+                    </td>
+                }
+
+             </tr>
+           
             <tr>
                 <td class="font-weight-bold">
                     Publisher

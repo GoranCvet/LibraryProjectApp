@@ -11,6 +11,7 @@ namespace LibraryProject.Domain
         {
             Lendings = new List<Lending>();
             BookCopies = new List<BookCopies>();
+            TitleAuthors = new List<TitleAuthor>();
         }
         public int Id { get; set; }
         [Required, Display(Name = "Book Title")]
@@ -20,15 +21,12 @@ namespace LibraryProject.Domain
         public string BookPhoto { get; set; }
         [Required, Display(Name = "Book Description")]
         public string BookDescription { get; set; }
-
-        public Author Author { get; set; }
-        [Display(Name ="Author")]
-        public int AuthorId { get; set; }
         public Publisher Publisher { get; set; }
         [Display(Name = "Publihser")]
         public int PublisherId { get; set; }
 
         public List<Lending> Lendings { get; set; }
         public List<BookCopies> BookCopies { get; set; }
+        public List<TitleAuthor> TitleAuthors { get; set; }
     }
 }

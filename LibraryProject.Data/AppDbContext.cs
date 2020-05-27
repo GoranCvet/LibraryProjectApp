@@ -11,6 +11,7 @@ namespace LibraryProject.Data
         public DbSet<Author> Authors { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<TitleAuthor> TitleAuthors { get; set; }
         public DbSet<BookCopies> BookCopies { get; set; }
         public DbSet<Library> Libraries { get; set; }
         public DbSet<Client> Clients { get; set; }
@@ -22,6 +23,7 @@ namespace LibraryProject.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BookCopies>().HasKey(bc => new { bc.BookId, bc.LibraryId });
+            modelBuilder.Entity<TitleAuthor>().HasKey(ta => new { ta.AuthorId, ta.BookId });
             base.OnModelCreating(modelBuilder);
         }
 

@@ -36,6 +36,8 @@ namespace WebApp
             services.AddScoped<IClientService, ClientData>();
             services.AddScoped<ILendingService, LendingData>();
             services.AddScoped<ILibraryService, LibraryData>();
+            services.AddScoped<ITitleAuthorService, TitleAuthorData>();
+
 
         }
 
@@ -49,7 +51,7 @@ namespace WebApp
             else
             {
                 app.UseExceptionHandler("/Error");
-               // The default HSTS value is 30 days.You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //The default HSTS value is 30 days.You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseExceptionHandler("/Error");

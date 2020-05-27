@@ -41,7 +41,8 @@ namespace LibraryProject.Data.SqlData
         public Book GetBookById(int id)
         {
             return dbContext.Books
-                .Include(b => b.Author)
+                .Include(b => b.TitleAuthors)
+                .ThenInclude(ta => ta.Author)
                 .Include(b => b.Publisher)
                 .Include(b => b.BookCopies)
                 .SingleOrDefault(b => b.Id == id);
@@ -53,9 +54,10 @@ namespace LibraryProject.Data.SqlData
             var authorPattern = !string.IsNullOrEmpty(author) ? $"{author}%" : author;
 
             return dbContext.Books
-                .Include(b => b.Author)
+                .Include(b => b.TitleAuthors)
+                .ThenInclude(ta => ta.Author)
                 .Where(b => string.IsNullOrEmpty(book) || EF.Functions.Like(b.Title, titlePattern))
-                .Where(a => string.IsNullOrEmpty(author) || EF.Functions.Like(a.Author.Name, authorPattern))
+                //.Where(a => string.IsNullOrEmpty(author) || EF.Functions.Like(a.TitleAuthors..Name, authorPattern))
                 .OrderBy(b => b.Title)
                 .ToList();
         }

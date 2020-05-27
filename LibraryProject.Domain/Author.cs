@@ -9,7 +9,7 @@ namespace LibraryProject.Domain
     {
         public Author()
         {
-            Books = new List<Book>();
+            TitleAuthors = new List<TitleAuthor>();
         }
         public int Id { get; set; }
         [Required, Display(Name = "Author Name"), StringLength(50, ErrorMessage = "Name length can't be more than 50")]
@@ -19,6 +19,6 @@ namespace LibraryProject.Domain
         public string AuthorBio { get; set; }
         public string AuthorPhoto { get; set; }
 
-        public List<Book> Books { get; set; }
+        public List<TitleAuthor> TitleAuthors { get; set; }
     }
 }

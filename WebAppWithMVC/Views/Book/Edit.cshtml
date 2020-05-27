@@ -18,14 +18,14 @@
         <span asp-validation-for="Book.Title" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
+    @*<div class="form-group">
         <label asp-for="Book.AuthorId"></label>
         <select class="form-control" asp-for="Book.AuthorId" asp-items="@Model.SelectAuthor">
             <option value="">
                 Select Author
             </option>
         </select>
-    </div>
+    </div>*@
 
     <div class="form-group">
         <label asp-for="Book.BookDescription"></label>
